@@ -1,0 +1,3 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Jul 15 22:13:39 CST 2022","Fri Jul 15 22:13:46 CST 2022","6495","Test_cases","test_case01","TestBaidu","","","test_01_search[value1]",""
+"passed","Fri Jul 15 22:13:32 CST 2022","Fri Jul 15 22:13:39 CST 2022","6808","Test_cases","test_case01","TestBaidu","","","test_01_search[value0]",""
