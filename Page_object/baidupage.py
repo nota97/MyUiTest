@@ -15,6 +15,7 @@ class baidupage(base_selenium):
         self.input_value(self.search_value, value)
         self.click_event(self.search_button)
         time.sleep(3)
+        # 可添加return值用于断言
 
 
 if __name__ == '__main__':

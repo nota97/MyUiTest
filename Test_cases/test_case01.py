@@ -9,6 +9,7 @@ from Config.yamlload import yamlload
 class TestBaidu:
     def setup_class(cls) -> None:
         print("~~~~~~~~~~测试开始执行~~~~~~~~~~")
+        # 多页面业务流使用一个driver串联
         cls.driver = webdriver.Edge()
         cls.bd = baidupage(cls.driver)
 
