@@ -1,5 +1,6 @@
 import datetime
 from selenium import webdriver
+import os
 import time
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -7,6 +8,12 @@ from selenium.webdriver.common.action_chains import ActionChains
 import pywinauto
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from Config.log_set import Log
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+log_path = os.path.join(BASE_DIR, 'Output/log/').replace('/', '\\')
+logger = Log(log_path)
 
 
 class base_selenium:
@@ -16,12 +23,14 @@ class base_selenium:
     # 打开指定页面
     def Open_Url(self, url):
         if self.driver:
-            if "http://" in url:
+            if "http://" in url or "https://" in url:
                 self.driver.get(url)
             else:
                 print("url格式错误")
+                logger.warning('{0},url格式错误'.format(url))
         else:
             print("LOG：打开浏览器失败")
+            logger.error('打开浏览器失败')
         time.sleep(3)
 
     # 等待页面元素可见
@@ -32,21 +41,23 @@ class base_selenium:
             end = datetime.datetime.now()
             wait_time = (end - start).seconds
             print('等待页面元素显示，共耗时：' + str(wait_time))
-            # logger.info('{0},等待页面元素:{1}:可见，共耗时{2}s '.format(doc, locator, wait_time))
+            logger.info('{0},等待页面元素:{1}:可见，共耗时{2}s '.format(doc, loc, wait_time))
         except:
-            # logger.info('{0},等待页面元素:{1} 失败！！！'.format(doc, locator))
+            logger.error('{0},等待页面元素:{1} 失败！！！'.format(doc, loc))
             # self.save_pictuer(doc)
             print("页面显示元素失败")
 
     # 获取页面元素
     def local_element(self, loc, doc=''):
         element = None
+        logger.info('{0},查找页面元素:{1}'.format(doc, loc))
         try:
             self.wait_eleVisible(loc, doc)
             element = self.driver.find_element(*loc)
             return element
         except:
             print("获取页面元素失败")
+            logger.error('获取页面元素失败:{0}'.format(loc))
 
     # input输入
     def input_value(self, loc, value):
