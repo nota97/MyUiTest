@@ -40,12 +40,12 @@ class base_selenium:
             WebDriverWait(self.driver, timeout=20, poll_frequency=0.5).until(EC.visibility_of_element_located(loc))
             end = datetime.datetime.now()
             wait_time = (end - start).seconds
-            print('等待页面元素显示，共耗时：' + str(wait_time))
+            # print('等待页面元素显示，共耗时：' + str(wait_time))
             logger.info('{0},等待页面元素:{1}:可见，共耗时{2}s '.format(doc, loc, wait_time))
         except:
             logger.error('{0},等待页面元素:{1} 失败！！！'.format(doc, loc))
             # self.save_pictuer(doc)
-            print("页面显示元素失败")
+            # print("页面显示元素失败")
 
     # 获取页面元素
     def local_element(self, loc, doc=''):
@@ -56,7 +56,7 @@ class base_selenium:
             element = self.driver.find_element(*loc)
             return element
         except:
-            print("获取页面元素失败")
+            # print("获取页面元素失败")
             logger.error('获取页面元素失败:{0}'.format(loc))
 
     # input输入
