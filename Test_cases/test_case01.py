@@ -27,10 +27,16 @@ class TestBaidu:
         time.sleep(3)
         cls.driver.close()
 
+    @pytest.mark.skip
     @pytest.mark.parametrize('value', yamlload('./Data/search.yaml'))
     def test_01_search(self, value):
         logger.info('执行测试用例数据：{0}'.format(value['searchname']))
         self.bd.baidusearch(value['searchname'])
+
+    @pytest.mark.parametrize('login_value', yamlload('./Data/baidulogin.yaml'))
+    def test_02_login(self, login_value):
+        logger.info('执行测试用例数据：账号 {0}'.format(login_value['loginname']))
+        self.bd.baidulogin(login_value['loginname'], login_value['password'])
 
 
 if __name__ == '__main__':
